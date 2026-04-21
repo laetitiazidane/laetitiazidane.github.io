@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,33 +8,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-:root {
-  --void: #080808;
-  --deep: #0f0f0f;
-  --surface: #161616;
-  --raised: #1e1e1e;
-  --border: rgba(255,255,255,0.07);
-  --border-hover: rgba(255,255,255,0.15);
-  --gold: #c9a84c;
-  --gold-light: #e8c96d;
-  --gold-dim: rgba(201,168,76,0.12);
-  --white: #f0ece4;
-  --muted: #7a7570;
-  --muted2: #4a4742;
-}
+:root{--void:#080808;--deep:#0f0f0f;--surface:#161616;--raised:#1e1e1e;--border:rgba(255,255,255,0.07);--border-hover:rgba(255,255,255,0.15);--gold:#c9a84c;--gold-light:#e8c96d;--gold-dim:rgba(201,168,76,0.12);--white:#f0ece4;--muted:#7a7570;--muted2:#4a4742}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--void)}
-::-webkit-scrollbar-thumb{background:var(--muted2)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--void)}::-webkit-scrollbar-thumb{background:var(--muted2)}
 body{background:var(--void);color:var(--white);font-family:'Jost',sans-serif;font-weight:300;font-size:15px;line-height:1.7;overflow-x:hidden}
-.cursor{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s ease,opacity .15s ease}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(201,168,76,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .3s ease}
+.cursor{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,opacity .15s}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(201,168,76,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .3s}
+
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 60px;background:rgba(8,8,8,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.1em;color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:40px}
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--gold)}
+
+/* LANG SWITCH */
+.lang-switch{display:flex;align-items:center;gap:0;border:1px solid var(--border);overflow:hidden}
+.lang-btn{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-family:'Jost',sans-serif;font-weight:500;padding:6px 14px;background:transparent;border:none;color:var(--muted);cursor:pointer;transition:all .2s;position:relative}
+.lang-btn.active{background:var(--gold);color:var(--void)}
+.lang-btn:not(.active):hover{color:var(--gold)}
+.lang-sep{width:1px;height:28px;background:var(--border)}
+
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 60px 80px;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(201,168,76,.06) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,168,76,.03) 0%,transparent 50%);pointer-events:none}
 .hero-bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:80px 80px}
@@ -55,7 +52,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;ali
 .scroll-hint{position:absolute;bottom:30px;left:60px;display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);opacity:0;animation:revealUp .8s ease 1.2s forwards}
 .scroll-line{width:40px;height:1px;background:var(--muted);position:relative;overflow:hidden}
 .scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);animation:scanline 2s ease-in-out 1.5s infinite}
-@keyframes scanline{0%{left:-100%}50%{left:0%}100%{left:100%}}
+@keyframes scanline{0%{left:-100%}50%{left:0}100%{left:100%}}
+
+/* MAIN */
 main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .section{padding:100px 0;border-bottom:1px solid var(--border)}
 .section:last-child{border-bottom:none}
@@ -64,6 +63,8 @@ main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .section-title-wrap{padding-left:20px;position:relative;z-index:1}
 .section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;line-height:1;letter-spacing:-.01em}
+
+/* EXP */
 .exp-list{display:flex;flex-direction:column;gap:2px}
 .exp-item{background:var(--surface);border:1px solid var(--border);padding:36px 40px;display:grid;grid-template-columns:1fr 200px;gap:40px;transition:border-color .3s,background .3s;position:relative;overflow:hidden}
 .exp-item::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--gold);transition:height .4s cubic-bezier(.16,1,.3,1)}
@@ -78,6 +79,8 @@ main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .exp-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
 .exp-date{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.7}
 .badge-current{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--void);background:var(--gold);padding:5px 14px;font-weight:600}
+
+/* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
 .skill-block{background:var(--surface);border:1px solid var(--border);padding:32px;transition:border-color .3s}
 .skill-block:hover{border-color:var(--border-hover)}
@@ -85,6 +88,8 @@ main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:11px;padding:5px 12px;border:1px solid var(--border);color:rgba(240,236,228,.6);letter-spacing:.04em;transition:all .2s;cursor:default;font-weight:400}
 .tag:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+
+/* CERTS */
 .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
 .cert-item{background:var(--surface);border:1px solid var(--border);padding:28px 32px;display:flex;align-items:center;gap:24px;transition:all .3s;position:relative;overflow:hidden}
 .cert-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s cubic-bezier(.16,1,.3,1);transform-origin:left}
@@ -94,11 +99,15 @@ main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .cert-medal svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5}
 .cert-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;line-height:1.25;margin-bottom:4px}
 .cert-org{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+
+/* EDU */
 .edu-item{background:var(--surface);border:1px solid var(--border);padding:40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;transition:border-color .3s}
 .edu-item:hover{border-color:var(--border-hover)}
 .edu-degree{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;font-style:italic;margin-bottom:6px}
 .edu-school{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .edu-desc{font-size:13px;color:rgba(240,236,228,.48)}
+
+/* LANG */
 .lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
 .lang-item{background:var(--surface);border:1px solid var(--border);padding:32px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
 .lang-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .4s cubic-bezier(.16,1,.3,1)}
@@ -106,6 +115,8 @@ main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .lang-item:hover::before{transform:scaleX(1)}
 .lang-name{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.05em;line-height:1;margin-bottom:8px}
 .lang-level{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* QR */
 .qr-section{background:var(--surface);border:1px solid var(--border);padding:48px 60px;display:flex;align-items:center;gap:60px;margin-top:100px;position:relative;overflow:hidden}
 .qr-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 100% at 0% 50%,rgba(201,168,76,.04) 0%,transparent 60%);pointer-events:none}
 .qr-wrapper{flex-shrink:0;border:1px solid rgba(201,168,76,.3);padding:12px;background:#fff;position:relative}
@@ -117,33 +128,31 @@ main{max-width:1200px;margin:0 auto;padding:0 60px 120px}
 .qr-headline{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1.25;margin-bottom:16px}
 .qr-sub{font-size:13px;color:rgba(240,236,228,.5);max-width:400px;line-height:1.8}
 .qr-divider{width:1px;height:120px;background:var(--border);flex-shrink:0}
+
+/* FOOTER */
 footer{padding:48px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.1em;color:var(--muted)}
 footer a{color:var(--muted);text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--gold)}
 .footer-mark{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:rgba(201,168,76,.5)}
+
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+
+/* LANG TRANSITION */
+[data-en],[data-fr]{transition:opacity .25s ease}
+body.switching [data-en],body.switching [data-fr]{opacity:0}
+
 @media(max-width:900px){
-  nav{padding:0 24px}
-  .nav-links{display:none}
-  .hero{padding:100px 24px 60px}
-  .hero-bottom{grid-template-columns:1fr}
-  .hero-meta{text-align:left}
-  .hero-location{justify-content:flex-start}
-  .hero-contact-links{align-items:flex-start}
-  main{padding:0 24px 80px}
-  .skills-grid{grid-template-columns:1fr 1fr}
-  .certs-grid{grid-template-columns:1fr}
-  .lang-grid{grid-template-columns:repeat(2,1fr)}
-  .exp-item{grid-template-columns:1fr}
-  .exp-right{flex-direction:row;justify-content:space-between}
-  .qr-section{flex-direction:column;padding:40px 24px;gap:32px}
-  .qr-divider{display:none}
-  footer{flex-direction:column;gap:12px;text-align:center}
-  .scroll-hint{left:24px}
+  nav{padding:0 20px}.nav-links{display:none}
+  .hero{padding:100px 24px 60px}.hero-bottom{grid-template-columns:1fr}
+  .hero-meta{text-align:left}.hero-location{justify-content:flex-start}.hero-contact-links{align-items:flex-start}
+  main{padding:0 24px 80px}.skills-grid{grid-template-columns:1fr 1fr}
+  .certs-grid{grid-template-columns:1fr}.lang-grid{grid-template-columns:repeat(2,1fr)}
+  .exp-item{grid-template-columns:1fr}.exp-right{flex-direction:row;justify-content:space-between}
+  .qr-section{flex-direction:column;padding:40px 24px;gap:32px}.qr-divider{display:none}
+  footer{flex-direction:column;gap:12px;text-align:center}.scroll-hint{left:24px}
 }
 </style>
 </head>
@@ -152,27 +161,36 @@ footer a:hover{color:var(--gold)}
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo">LZ</div>
-  <ul class="nav-links">
-    <li><a href="#experience">Expérience</a></li>
-    <li><a href="#skills">Compétences</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#experience" data-en="Experience" data-fr="Expérience">Experience</a></li>
+      <li><a href="#skills" data-en="Skills" data-fr="Compétences">Skills</a></li>
+      <li><a href="#certifications" data-en="Certifications" data-fr="Certifications">Certifications</a></li>
+      <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+    </div>
+  </div>
 </nav>
 
+<!-- HERO -->
 <header class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-eyebrow">IT Project Manager · Algiers, Algeria</div>
+  <div class="hero-eyebrow" data-en="IT Project Manager · Algiers, Algeria" data-fr="Chef de Projet IT · Alger, Algérie">IT Project Manager · Algiers, Algeria</div>
   <h1 class="hero-name">Laetitia<span class="line2">Zidane</span></h1>
   <div class="hero-bottom">
     <div>
-      <p class="hero-role">Engineering Foundation. Delivery Focus.</p>
-      <p class="hero-summary">IT Project Manager with 3+ years orchestrating complex digital initiatives from scoping to production. Bridges C-suite priorities and engineering execution — with a strong command of cloud strategy, GRC, and cross-functional leadership of 20+ engineers.</p>
+      <p class="hero-role" data-en="Engineering Foundation. Delivery Focus." data-fr="Fondation Technique. Orientation Livraison.">Engineering Foundation. Delivery Focus.</p>
+      <p class="hero-summary" data-en="IT Project Manager with 3+ years orchestrating complex digital initiatives from scoping to production. Bridges C-suite priorities and engineering execution — with a strong command of cloud strategy, GRC, and cross-functional leadership of 20+ engineers." data-fr="Chef de Projet IT avec 3+ ans d'expérience dans la conduite d'initiatives digitales complexes, du cadrage à la production. Interface entre les décisions stratégiques et l'exécution technique — maîtrise de la stratégie cloud, de la GRC et du leadership de 20+ ingénieurs.">IT Project Manager with 3+ years orchestrating complex digital initiatives from scoping to production. Bridges C-suite priorities and engineering execution — with a strong command of cloud strategy, GRC, and cross-functional leadership of 20+ engineers.</p>
     </div>
     <div class="hero-meta">
-      <div class="hero-location">Algiers, Algeria</div>
+      <div class="hero-location" data-en="Algiers, Algeria" data-fr="Alger, Algérie">Algiers, Algeria</div>
       <div class="hero-contact-links">
         <a href="mailto:laetitiazidane18@gmail.com">laetitiazidane18@gmail.com</a>
         <a href="tel:+213541514295">+213 541 514 295</a>
@@ -181,132 +199,140 @@ footer a:hover{color:var(--gold)}
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span data-en="Scroll" data-fr="Défiler">Scroll</span></div>
 </header>
 
 <main>
 
+  <!-- EXPERIENCE -->
   <section class="section" id="experience">
     <div class="section-header reveal">
       <div class="section-num">01</div>
       <div class="section-title-wrap">
-        <div class="section-label">Parcours professionnel</div>
-        <h2 class="section-title">Expérience</h2>
+        <div class="section-label" data-en="Professional Journey" data-fr="Parcours Professionnel">Professional Journey</div>
+        <h2 class="section-title" data-en="Experience" data-fr="Expérience">Experience</h2>
       </div>
     </div>
     <div class="exp-list">
+
       <div class="exp-item exp-current reveal reveal-delay-1">
         <div>
           <div class="exp-role">IT Engineer — Project Manager</div>
-          <div class="exp-org">High Commission for Digitalization · Algiers</div>
+          <div class="exp-org" data-en="High Commission for Digitalization · Algiers" data-fr="Haut-Commissariat à la Numérisation · Alger">High Commission for Digitalization · Algiers</div>
           <ul class="exp-bullets">
-            <li>Pilotage end-to-end de multiples projets IT stratégiques, du scoping à la mise en production</li>
-            <li>Leadership & mentoring de 20+ ingénieurs cross-fonctionnels avec suivi de performance</li>
-            <li>Supervision de la stratégie cloud et conformité cybersécurité & réglementaire</li>
-            <li>Interface entre décideurs administratifs et équipes techniques pour traduire les exigences en plans actionnables</li>
+            <li data-en="End-to-end ownership of multiple strategic IT projects, from scoping to production deployment" data-fr="Pilotage end-to-end de plusieurs projets IT stratégiques, du cadrage jusqu'à la mise en production">End-to-end ownership of multiple strategic IT projects, from scoping to production deployment</li>
+            <li data-en="Leadership & mentoring of 20+ cross-functional engineers with performance tracking" data-fr="Leadership et mentoring de 20+ ingénieurs cross-fonctionnels avec suivi de performance">Leadership & mentoring of 20+ cross-functional engineers with performance tracking</li>
+            <li data-en="Supervision of cloud deployment strategy and cybersecurity & regulatory compliance" data-fr="Supervision de la stratégie cloud et de la conformité cybersécurité & réglementaire">Supervision of cloud deployment strategy and cybersecurity & regulatory compliance</li>
+            <li data-en="Interface between administrative stakeholders and technical teams to translate requirements into actionable plans" data-fr="Interface entre décideurs administratifs et équipes techniques pour traduire les exigences en plans actionnables">Interface between administrative stakeholders and technical teams to translate requirements into actionable plans</li>
           </ul>
         </div>
         <div class="exp-right">
-          <div class="exp-date">Nov 2024<br>— Présent</div>
-          <div class="badge-current">Poste actuel</div>
+          <div class="exp-date" data-en="Nov 2024<br>— Present" data-fr="Nov 2024<br>— Présent">Nov 2024<br>— Present</div>
+          <div class="badge-current" data-en="Current Role" data-fr="Poste Actuel">Current Role</div>
         </div>
       </div>
+
       <div class="exp-item reveal reveal-delay-2">
         <div>
           <div class="exp-role">Backend Engineer</div>
-          <div class="exp-org">Diraya Inc. · Remote — Algeria</div>
+          <div class="exp-org" data-en="Diraya Inc. · Remote — Algeria" data-fr="Diraya Inc. · Télétravail — Algérie">Diraya Inc. · Remote — Algeria</div>
           <ul class="exp-bullets">
-            <li>Développement d'un système de paie et d'impôt conforme aux réglementations en vigueur</li>
-            <li>Participation active aux cérémonies Agile, sprint planning et reporting projet</li>
+            <li data-en="Development of a payroll and income tax system compliant with local regulations" data-fr="Développement d'un système de paie et d'impôt sur le revenu conforme aux réglementations locales">Development of a payroll and income tax system compliant with local regulations</li>
+            <li data-en="Active participation in Agile ceremonies, sprint planning, and project reporting" data-fr="Participation active aux cérémonies Agile, sprint planning et reporting projet">Active participation in Agile ceremonies, sprint planning, and project reporting</li>
           </ul>
         </div>
         <div class="exp-right">
-          <div class="exp-date">Août – Nov 2024</div>
+          <div class="exp-date">Aug – Nov 2024</div>
         </div>
       </div>
+
       <div class="exp-item reveal reveal-delay-3">
         <div>
           <div class="exp-role">Backend Engineer / Technical Lead</div>
-          <div class="exp-org">OmniverseLab · Remote — France</div>
+          <div class="exp-org" data-en="OmniverseLab · Remote — France" data-fr="OmniverseLab · Télétravail — France">OmniverseLab · Remote — France</div>
           <ul class="exp-bullets">
-            <li>Pilotage de la migration backend Express.js → NestJS (scalabilité & maintenabilité)</li>
-            <li>Encadrement de l'équipe de développement et reporting régulier aux parties prenantes</li>
+            <li data-en="Led backend migration from Express.js to NestJS architecture (scalability & maintainability)" data-fr="Pilotage de la migration backend Express.js → NestJS (scalabilité & maintenabilité)">Led backend migration from Express.js to NestJS architecture (scalability & maintainability)</li>
+            <li data-en="Supervised development team and delivered regular progress reports to stakeholders" data-fr="Encadrement de l'équipe de développement et reporting régulier aux parties prenantes">Supervised development team and delivered regular progress reports to stakeholders</li>
           </ul>
         </div>
         <div class="exp-right">
-          <div class="exp-date">Avr – Sep 2024</div>
+          <div class="exp-date">Apr – Sep 2024</div>
         </div>
       </div>
+
       <div class="exp-item reveal">
         <div>
           <div class="exp-role">Software Engineer</div>
-          <div class="exp-org">CodesNova · Tizi Ouzou, Algeria</div>
+          <div class="exp-org" data-en="CodesNova · Tizi Ouzou, Algeria" data-fr="CodesNova · Tizi Ouzou, Algérie">CodesNova · Tizi Ouzou, Algeria</div>
           <ul class="exp-bullets">
-            <li>Développement de modules backend et contribution à la conception système</li>
-            <li>Monitoring et observabilité des environnements de production</li>
+            <li data-en="Backend module development and contribution to system design with project leads" data-fr="Développement de modules backend et contribution à la conception système">Backend module development and contribution to system design with project leads</li>
+            <li data-en="Monitoring and observability of production systems to ensure operational continuity" data-fr="Monitoring et observabilité des systèmes de production pour assurer la continuité opérationnelle">Monitoring and observability of production systems to ensure operational continuity</li>
           </ul>
         </div>
         <div class="exp-right">
           <div class="exp-date">Nov 2022 – Mar 2024</div>
         </div>
       </div>
+
       <div class="exp-item reveal">
         <div>
-          <div class="exp-role">Lab Instructor & Internship Director</div>
-          <div class="exp-org">Université Mouloud Mammeri · Algeria</div>
+          <div class="exp-role" data-en="Lab Instructor & Internship Director" data-fr="Chargée de TP & Directrice de Stages">Lab Instructor & Internship Director</div>
+          <div class="exp-org" data-en="University Mouloud Mammeri · Algeria" data-fr="Université Mouloud Mammeri · Algérie">University Mouloud Mammeri · Algeria</div>
           <ul class="exp-bullets">
-            <li>Encadrement de TP réseaux — configuration système et dépannage</li>
-            <li>Direction d'une équipe étudiante sur projet mobile — architecture, intégration, jalons</li>
+            <li data-en="Supervised practical networking labs — system configuration and student troubleshooting" data-fr="Encadrement de TP réseaux — configuration système et dépannage étudiant">Supervised practical networking labs — system configuration and student troubleshooting</li>
+            <li data-en="Directed a student team on a mobile app project — architecture, integration, milestones" data-fr="Direction d'une équipe étudiante sur projet mobile — architecture, intégration, jalons">Directed a student team on a mobile app project — architecture, integration, milestones</li>
           </ul>
         </div>
         <div class="exp-right">
           <div class="exp-date">Mar – Nov 2024</div>
         </div>
       </div>
+
     </div>
   </section>
 
+  <!-- SKILLS -->
   <section class="section" id="skills">
     <div class="section-header reveal">
       <div class="section-num">02</div>
       <div class="section-title-wrap">
-        <div class="section-label">Expertise technique</div>
-        <h2 class="section-title">Compétences</h2>
+        <div class="section-label" data-en="Technical Expertise" data-fr="Expertise Technique">Technical Expertise</div>
+        <h2 class="section-title" data-en="Skills" data-fr="Compétences">Skills</h2>
       </div>
     </div>
     <div class="skills-grid">
       <div class="skill-block reveal reveal-delay-1">
-        <div class="skill-block-title">Project Management</div>
+        <div class="skill-block-title" data-en="Project Management" data-fr="Gestion de Projet">Project Management</div>
         <div class="skill-tags">
           <span class="tag">Agile / Scrum</span><span class="tag">Roadmap Planning</span><span class="tag">Risk Management</span><span class="tag">Program Management</span><span class="tag">Stakeholder Reporting</span>
         </div>
       </div>
       <div class="skill-block reveal reveal-delay-2">
-        <div class="skill-block-title">Architecture & Design</div>
+        <div class="skill-block-title" data-en="Architecture & Design" data-fr="Architecture & Conception">Architecture & Design</div>
         <div class="skill-tags">
-          <span class="tag">System Design</span><span class="tag">API REST</span><span class="tag">Microservices</span><span class="tag">DB Modeling</span><span class="tag">Observability</span><span class="tag">Performance Optim.</span>
+          <span class="tag">System Design</span><span class="tag">REST API</span><span class="tag">Microservices</span><span class="tag">DB Modeling</span><span class="tag">Observability</span><span class="tag">Performance Optim.</span>
         </div>
       </div>
       <div class="skill-block reveal reveal-delay-3">
-        <div class="skill-block-title">GRC & Sécurité</div>
+        <div class="skill-block-title" data-en="GRC & Security" data-fr="GRC & Sécurité">GRC & Security</div>
         <div class="skill-tags">
           <span class="tag">ISO 27001</span><span class="tag">GDPR</span><span class="tag">SSDLC</span><span class="tag">ISO 15489</span><span class="tag">Vulnerability Analysis</span><span class="tag">Secure Architecture</span>
         </div>
       </div>
       <div class="skill-block reveal reveal-delay-1">
-        <div class="skill-block-title">Backend & Frontend</div>
+        <div class="skill-block-title" data-en="Backend & Frontend" data-fr="Backend & Frontend">Backend & Frontend</div>
         <div class="skill-tags">
           <span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">Express.js</span><span class="tag">Python / Flask</span><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span>
         </div>
       </div>
       <div class="skill-block reveal reveal-delay-2">
-        <div class="skill-block-title">Cloud & DevOps</div>
+        <div class="skill-block-title" data-en="Cloud & DevOps" data-fr="Cloud & DevOps">Cloud & DevOps</div>
         <div class="skill-tags">
           <span class="tag">GCP</span><span class="tag">Huawei Cloud</span><span class="tag">Docker</span><span class="tag">Git / GitHub / GitLab</span><span class="tag">Linux</span><span class="tag">Jira</span>
         </div>
       </div>
       <div class="skill-block reveal reveal-delay-3">
-        <div class="skill-block-title">Bases de données</div>
+        <div class="skill-block-title" data-en="Databases" data-fr="Bases de Données">Databases</div>
         <div class="skill-tags">
           <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">Redis</span>
         </div>
@@ -314,11 +340,12 @@ footer a:hover{color:var(--gold)}
     </div>
   </section>
 
+  <!-- CERTIFICATIONS -->
   <section class="section" id="certifications">
     <div class="section-header reveal">
       <div class="section-num">03</div>
       <div class="section-title-wrap">
-        <div class="section-label">Accréditations</div>
+        <div class="section-label" data-en="Accreditations" data-fr="Accréditations">Accreditations</div>
         <h2 class="section-title">Certifications</h2>
       </div>
     </div>
@@ -346,45 +373,60 @@ footer a:hover{color:var(--gold)}
     </div>
   </section>
 
+  <!-- EDUCATION -->
   <section class="section">
     <div class="section-header reveal">
       <div class="section-num">04</div>
       <div class="section-title-wrap">
-        <div class="section-label">Cursus académique</div>
-        <h2 class="section-title">Formation</h2>
+        <div class="section-label" data-en="Academic Background" data-fr="Cursus Académique">Academic Background</div>
+        <h2 class="section-title" data-en="Education" data-fr="Formation">Education</h2>
       </div>
     </div>
     <div class="edu-item reveal">
       <div>
-        <div class="edu-degree">Master en Ingénierie des Systèmes d'Information</div>
-        <div class="edu-school">Université Mouloud Mammeri · Algeria</div>
-        <div class="edu-desc">Architecture d'entreprise · Déploiement système · Sécurité · Supervision</div>
+        <div class="edu-degree" data-en="Master's Degree in Information Systems Engineering" data-fr="Master en Ingénierie des Systèmes d'Information">Master's Degree in Information Systems Engineering</div>
+        <div class="edu-school" data-en="University Mouloud Mammeri · Algeria" data-fr="Université Mouloud Mammeri · Algérie">University Mouloud Mammeri · Algeria</div>
+        <div class="edu-desc" data-en="Enterprise architecture · System deployment · Security · Supervision" data-fr="Architecture d'entreprise · Déploiement système · Sécurité · Supervision">Enterprise architecture · System deployment · Security · Supervision</div>
       </div>
       <div class="exp-date" style="text-align:right;flex-shrink:0">Oct 2020<br>— Oct 2022</div>
     </div>
   </section>
 
+  <!-- LANGUAGES -->
   <section class="section">
     <div class="section-header reveal">
       <div class="section-num">05</div>
       <div class="section-title-wrap">
-        <div class="section-label">Communication</div>
-        <h2 class="section-title">Langues</h2>
+        <div class="section-label" data-en="Communication" data-fr="Communication">Communication</div>
+        <h2 class="section-title" data-en="Languages" data-fr="Langues">Languages</h2>
       </div>
     </div>
     <div class="lang-grid">
-      <div class="lang-item reveal reveal-delay-1"><div class="lang-name">Français</div><div class="lang-level">Bilingue</div></div>
-      <div class="lang-item reveal reveal-delay-2"><div class="lang-name">English</div><div class="lang-level">Professional</div></div>
-      <div class="lang-item reveal reveal-delay-3"><div class="lang-name">Kabyle</div><div class="lang-level">Natif</div></div>
-      <div class="lang-item reveal"><div class="lang-name">Arabe</div><div class="lang-level">Intermédiaire</div></div>
+      <div class="lang-item reveal reveal-delay-1">
+        <div class="lang-name">Français</div>
+        <div class="lang-level" data-en="Bilingual" data-fr="Bilingue">Bilingual</div>
+      </div>
+      <div class="lang-item reveal reveal-delay-2">
+        <div class="lang-name">English</div>
+        <div class="lang-level" data-en="Professional" data-fr="Professionnel">Professional</div>
+      </div>
+      <div class="lang-item reveal reveal-delay-3">
+        <div class="lang-name">Kabyle</div>
+        <div class="lang-level" data-en="Native" data-fr="Natif">Native</div>
+      </div>
+      <div class="lang-item reveal">
+        <div class="lang-name">Arabic</div>
+        <div class="lang-level" data-en="Intermediate" data-fr="Intermédiaire">Intermediate</div>
+      </div>
     </div>
   </section>
 
+  <!-- QR -->
   <div class="qr-section reveal" id="contact">
     <div class="qr-wrapper"><div id="qrcode"></div></div>
     <div class="qr-divider"></div>
     <div class="qr-content">
-      <div class="qr-eyebrow">Scanner pour me contacter</div>
+      <div class="qr-eyebrow" data-en="Scan to connect" data-fr="Scanner pour me contacter">Scan to connect</div>
       <h3 class="qr-headline">Laetitia Zidane<br>IT Project Manager</h3>
       <p class="qr-sub">linkedin.com/in/laetitiazidane · laetitiazidane18@gmail.com · +213 541 514 295</p>
     </div>
@@ -404,15 +446,41 @@ footer a:hover{color:var(--gold)}
 </main>
 
 <script>
+// QR
 new QRCode(document.getElementById("qrcode"),{text:"https://linkedin.com/in/laetitiazidane",width:120,height:120,colorDark:"#080808",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
 
+// Cursor
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-(function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+(function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
 
+// Reveal
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Lang switch
+let currentLang='en';
+function setLang(lang){
+  if(lang===currentLang)return;
+  currentLang=lang;
+
+  // toggle button styles
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-fr').classList.toggle('active',lang==='fr');
+
+  // update all translatable elements
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const val=el.getAttribute('data-'+lang);
+    if(!val)return;
+    // use innerHTML for elements that may contain <br>
+    if(val.includes('<br>')||el.tagName==='A'){el.innerHTML=val;}
+    else{el.textContent=val;}
+  });
+
+  // update html lang attribute
+  document.documentElement.lang=lang;
+}
 </script>
 </body>
 </html>
